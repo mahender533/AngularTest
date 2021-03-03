@@ -1,0 +1,29 @@
+
+ <form [formGroup]="addForm"  >
+   
+     
+    <div class="form-group">
+      <label for="email">Email address:</label>
+      <input type="email" formControlName="email" placeholder="Email"  name="email" class="form-control" [(ngModel)]="email" [email]="validateEmail">
+
+    </div>
+    <div class="clearfix"></div>
+  <br>
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" formControlName="firstName" placeholder="First Name" name="firstName" class="form-control"  [(ngModel)]="firstName">
+
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" [(ngModel)]="lastName">
+    </div>
+    <div class="clearfix"></div>
+    
+    
+    <button (click)="m1()">send data to parent</button>
+    
+  </form>
+  

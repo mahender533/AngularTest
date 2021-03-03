@@ -1,0 +1,112 @@
+<style>
+  span{
+    color: red;
+    font-size: x-large,
+    
+  }
+</style>
+
+<app-addemployeedetails [childMessage]="parentMessage" (myevnt)="m2($evnt)"></app-addemployeedetails>
+
+<br>
+data from child:<br>
+
+<!-- <router-outlet></router-outlet> -->
+
+<div class="col-md-6">
+  <h2 class="text-center" >Add User</h2>
+
+  <form [formGroup]="addForm"  >
+   
+     
+    <div class="form-group">
+      <label for="email">Email address:</label>
+      <input type="email" formControlName="email" placeholder="Email"  name="email" class="form-control" [(ngModel)]="email" [email]="validateEmail">
+      <span *ngIf="addForm.controls.email.hasError('required')"  >enter properName</span>
+      <span *ngIf="addForm.controls.email.hasError('pattern')">invalid</span>
+    </div>
+    <div class="clearfix"></div>
+  <br>
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" formControlName="firstName" placeholder="First Name" name="firstName" class="form-control"  [(ngModel)]="firstName">
+      <span *ngIf="addForm.controls.firstName.hasError('required')">entername</span>
+      <span *ngIf="addForm.controls.firstName.hasError('pattern')">enter properName</span>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" [(ngModel)]="lastName">
+    </div>
+    <div class="clearfix"></div>
+  <br>
+    <div class="col-xs-12 form-group">
+        <label for="country">Country:</label>
+        <select class="form-control" id="country" formControlName="country" (change)="m1($event.target.value)">
+          <option value="" disabled selected>Please select</option>
+          <option *ngFor="let country of countries"  [(value)]="country.id">{{country.name}}</option>
+        </select>
+        <span *ngIf="addForm.controls.country.hasError('required')">
+       *
+        </span>
+      </div>
+      <div class="clearfix"></div>
+  <br>
+  
+      <div class="col-xs-12 col-md-6 form-group">
+          <label for="state">State:</label>
+          <select class="form-control" id="state" formControlName="state">
+            <option value="" disabled selected>Please select</option>
+            <option *ngFor="let state of staresValues" [value]="state.id">{{state.name}}</option>
+          </select>
+        </div>
+        <div class="clearfix"></div>
+        
+  <br>
+    <input type="button" value="add"  (click)="onSubmit()"  [disabled]="upadte" [disabled]="addForm.invalid"  class="btn btn-success"  style="background-color:green;color:white;" >
+    <input type="button" name="update" [disabled]="!upadte" style="background-color:yellowgreen;color:white;" value="update" (click)= "update()">
+    <button (click)="getGridData()" value="show">show</button>
+  </form>
+</div>
+<div class="col-md-6">
+  
+  
+  
+  <table id= "details" *ngIf='employee.length>0' >
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>salary</th>
+      <th>Email</th>
+      <th>countries</th>
+      <th>states</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+ 
+      <tr *ngFor="let Employee of employee">
+      
+        <td><a [routerLink]="['/employee', Employee.id]">{{Employee.id}}</a></td>  
+        <td>{{Employee.name}}</td>
+        <td>{{Employee.LastName}}</td>
+        <td>{{Employee.salary}}</td>
+        <td>{{Employee.Email}}</td>
+        <td>{{Employee.countries}}</td>
+        <td>{{Employee.states}}</td>
+     
+      <td>
+          <button id="remove"  style="background-color:red;color:white;"(click)="deleteUser(user.id)">DELETE</button>
+        <button id="edit" (click)="editUser(user.id)" style="background-color:green;color:white;"> Edit</button>
+      </td>
+      </tr>
+    </tbody>      
+  </table>
+  </div>
+
+
+
+
